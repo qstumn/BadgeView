@@ -49,7 +49,7 @@ hide | 隐藏Badge
 
 ###5.Thanks For
 
-http://blog.csdn.net/mabeijianxi/article/details/50560361
+https://github.com/mabeijianxi/stickyDots
 
 #LICENSE
 ```

@@ -47,6 +47,10 @@ hide | 隐藏Badge
 2 . 自定义复杂的背景
 3 . 多种隐藏动画
 
+###5.Thanks For
+
+http://blog.csdn.net/mabeijianxi/article/details/50560361
+
 #LICENSE
 ```
 Copyright 2017, RorbinQiu

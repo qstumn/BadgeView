@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">BadgeView</string>
+    <string name="textview">TextView</string>
+    <string name="button">Button</string>
+</resources>

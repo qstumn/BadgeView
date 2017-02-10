@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 24
@@ -21,11 +22,19 @@ android {
     }
 }
 
+publish {
+    userOrg = 'qstumn'
+    groupId = 'q.rorbin'
+    artifactId = 'badgeview'
+    publishVersion = '1.0.1'
+    desc = 'android badgeview can drag dismiss like QQ'
+    website = 'https://github.com/qstumn/BadgeView'
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:24.2.1'
     testCompile 'junit:junit:4.12'
 }

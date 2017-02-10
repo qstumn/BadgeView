@@ -27,48 +27,48 @@ import java.util.List;
  */
 
 public class QBadgeView extends View implements Badge {
-    private int mColorBackground;
-    private int mColorBadgeNumber;
-    private float mBadgeNumberSize;
-    private float mBadgePadding;
-    private int mBadgeNumber;
-    private String mBadgeText;
-    private boolean mDraggable;
-    private boolean mDragging;
-    private boolean mExact;
-    private boolean mShowShadow;
-    private int mBadgeGravity;
-    private int mGravityOffset;
+    protected int mColorBackground;
+    protected int mColorBadgeNumber;
+    protected float mBadgeNumberSize;
+    protected float mBadgePadding;
+    protected int mBadgeNumber;
+    protected String mBadgeText;
+    protected boolean mDraggable;
+    protected boolean mDragging;
+    protected boolean mExact;
+    protected boolean mShowShadow;
+    protected int mBadgeGravity;
+    protected int mGravityOffset;
 
-    private float mDefalutRadius;
-    private float mFinalDragDistance;
-    private int mDragQuadrant;
-    private boolean mDragOutOfRange;
+    protected float mDefalutRadius;
+    protected float mFinalDragDistance;
+    protected int mDragQuadrant;
+    protected boolean mDragOutOfRange;
 
-    private Rect mBadgeNumberRect;
-    private RectF mBadgeBackgroundRect;
-    private Path mDragPath;
+    protected Rect mBadgeNumberRect;
+    protected RectF mBadgeBackgroundRect;
+    protected Path mDragPath;
 
-    private PointF mBadgeCenter;
-    private PointF mDragCenter;
-    private PointF mRowBadgeCenter;
-    private PointF mControlPoint;
+    protected PointF mBadgeCenter;
+    protected PointF mDragCenter;
+    protected PointF mRowBadgeCenter;
+    protected PointF mControlPoint;
 
-    private List<PointF> mInnertangentPoints;
+    protected List<PointF> mInnertangentPoints;
 
-    private View mTargetView;
+    protected View mTargetView;
 
-    private int mWidth;
-    private int mHeight;
+    protected int mWidth;
+    protected int mHeight;
 
-    private TextPaint mBadgeNumberPaint;
-    private Paint mBadgeBackgroundPaint;
+    protected TextPaint mBadgeNumberPaint;
+    protected Paint mBadgeBackgroundPaint;
 
-    private BadgeAnimator mAnimator;
+    protected BadgeAnimator mAnimator;
 
-    private OnDragStateChangedListener mDragStateChangedListener;
+    protected OnDragStateChangedListener mDragStateChangedListener;
 
-    private ViewGroup mActivityRoot;
+    protected ViewGroup mActivityRoot;
 
     public QBadgeView(Context context) {
         this(context, null);
@@ -211,7 +211,7 @@ public class QBadgeView extends View implements Badge {
         }
     }
 
-    private Bitmap createBadgeBitmap() {
+    protected Bitmap createBadgeBitmap() {
         Rect rect = new Rect();
         mBadgeNumberPaint.getTextBounds(mBadgeText.toCharArray(), 0, mBadgeText.length(), rect);
         Bitmap bitmap = Bitmap.createBitmap((int) (rect.width() + mBadgePadding * 2),
@@ -222,7 +222,7 @@ public class QBadgeView extends View implements Badge {
         return bitmap;
     }
 
-    private void screenFromWindow(boolean screen) {
+    protected void screenFromWindow(boolean screen) {
         if (getParent() != null) {
             ((ViewGroup) getParent()).removeView(this);
         }
@@ -392,7 +392,7 @@ public class QBadgeView extends View implements Badge {
         mRowBadgeCenter.y = mBadgeCenter.y + screenPoint[1];
     }
 
-    private void animateHide(PointF center) {
+    protected void animateHide(PointF center) {
         if (mBadgeNumber == 0) {
             return;
         }

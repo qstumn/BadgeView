@@ -9,7 +9,7 @@
 
 ```
 v1.0.2
-1. 修复了在ScrollView中bindTarget会导致拖拽消除时其实拖拽位置不正确的BUG
+1. 修复了在ScrollView中bindTarget会导致拖拽消除时起始拖拽位置不正确的BUG
 2. 减少了隐藏动画的碎片数量,降低内存占用
 ``` 
 

@@ -5,6 +5,13 @@
 
 ![](https://github.com/qstumn/BadgeView/blob/master/demo_gif.gif?raw=true)
 
+##Change Log
+```
+v1.0.2
+1. 修复了在ScrollView中bindTarget会导致拖拽消除时其实拖拽位置不正确的BUG
+2. 减少了隐藏动画的碎片数量,降低内存占用
+```    
+
 ###一些特性
 * 随意定制外观，包括Badge位置、底色、阴影、文字颜色、大小、内外边距等
 
@@ -17,7 +24,7 @@
 ## how to use:
 ###1. gradle
 ```
-    compile 'q.rorbin:badgeview:1.0.0'
+    compile 'q.rorbin:badgeview:1.0.2'
 ```
 
 ###2. code

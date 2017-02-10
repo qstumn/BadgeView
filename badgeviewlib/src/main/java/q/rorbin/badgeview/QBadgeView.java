@@ -173,6 +173,7 @@ public class QBadgeView extends View implements Badge {
                 if (mDraggable && event.getPointerId(event.getActionIndex()) == 0
                         && getPointDistance(mBadgeCenter, new PointF(event.getX(), event.getY()))
                         <= DisplayUtil.dp2px(getContext(), 10) && mBadgeNumber != 0) {
+                    initRowBadgeCenter();
                     mDragging = true;
                     updataListener(OnDragStateChangedListener.STATE_START);
                     mDefalutRadius = DisplayUtil.dp2px(getContext(), 7);
@@ -386,6 +387,10 @@ public class QBadgeView extends View implements Badge {
                 mBadgeCenter.y = mHeight / 2f;
                 break;
         }
+        initRowBadgeCenter();
+    }
+
+    private void initRowBadgeCenter() {
         int[] screenPoint = new int[2];
         getLocationOnScreen(screenPoint);
         mRowBadgeCenter.x = mBadgeCenter.x + screenPoint[0];

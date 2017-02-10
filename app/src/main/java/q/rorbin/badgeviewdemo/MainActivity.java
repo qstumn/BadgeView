@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         et_badgenumber.setText("5");
         seekBar_offset.setProgress(5);
         seekBar_padding.setProgress(5);
-        seekBar_numbersize.setProgress(10);
+        seekBar_numbersize.setProgress(11);
         swicth_exact.setChecked(false);
         swicth_draggable.setChecked(true);
         swicth_shadow.setChecked(true);

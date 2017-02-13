@@ -136,6 +136,7 @@ public class QBadgeView extends View implements Badge {
                 ViewGroup.LayoutParams targetParams = targetView.getLayoutParams();
                 targetContainer.removeView(targetView);
                 final BadgeContainer badgeContainer = new BadgeContainer(getContext());
+                badgeContainer.setId(targetView.getId());
                 targetContainer.addView(badgeContainer, index, targetParams);
                 badgeContainer.addView(targetView);
                 badgeContainer.addView(this);

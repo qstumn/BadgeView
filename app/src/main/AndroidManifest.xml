@@ -11,14 +11,14 @@
         <activity
             android:name=".MainActivity"
             android:windowSoftInputMode="adjustResize|stateHidden">
-
-        </activity>
-        <activity android:name=".ListViewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".ListViewActivity">
+
         </activity>
         <activity android:name=".RecyclerViewActivity">
 

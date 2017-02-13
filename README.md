@@ -8,9 +8,10 @@
 ##Change Log
 
 ```
-v1.0.3
+v1.0.4
 1. 修复在hide、bindTarget在某些情况下会出现异常崩溃的BUG
 2. BadgeGravity新增CENTER | TOP、CENTER | BOTTOM、CENTER | START、CENTER | END
+3. demo中添加了在ListView或RecyclerView中使用的例子
 ``` 
 
 ###一些特性
@@ -25,7 +26,7 @@ v1.0.3
 ## how to use:
 ###1. gradle
 ```
-    compile 'q.rorbin:badgeview:1.0.3'
+    compile 'q.rorbin:badgeview:1.0.4'
 ```
 
 ###2. code
@@ -48,8 +49,11 @@ setBadgeBackgroundColor | 设置背景色
 setShowShadow | 设置是否显示阴影
 setOnDragStateChangedListener | 打开拖拽消除模式并设置监听
 hide | 隐藏Badge
-       
-###4.更新计划
+
+###4.在ListView或者RecyclerView中使用
+可参考demo中[ListViewActivity](https://github.com/qstumn/BadgeView/blob/master/app/src/main/java/q/rorbin/badgeviewdemo/ListViewActivity.java)、[RecyclerViewActivity](https://github.com/qstumn/BadgeView/blob/master/app/src/main/java/q/rorbin/badgeviewdemo/RecyclerViewActivity.java)
+
+###5.更新计划
 
 1 . 显示文字
 2 . 自定义复杂的背景

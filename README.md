@@ -55,7 +55,7 @@ hide | 隐藏Badge
 2 . 自定义复杂的背景
 3 . 多种隐藏动画
 
-##Change Log History
+####Change Log History
 ```
 v1.0.2
 1. 修复了在ScrollView中bindTarget会导致拖拽消除时起始拖拽位置不正确的BUG

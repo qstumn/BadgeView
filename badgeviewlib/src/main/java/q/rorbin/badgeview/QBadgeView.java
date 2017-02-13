@@ -11,6 +11,7 @@ import android.graphics.RectF;
 import android.os.Build;
 import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,6 +21,8 @@ import android.widget.FrameLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * @author chqiu
@@ -115,7 +118,7 @@ public class QBadgeView extends View implements Badge {
     }
 
     @Override
-    public Badge bindTarget(View targetView) {
+    public Badge bindTarget(final View targetView) {
         if (targetView == null) {
             throw new IllegalStateException("targetView can not be null");
         }
@@ -125,25 +128,17 @@ public class QBadgeView extends View implements Badge {
         ViewParent targetParent = targetView.getParent();
         if (targetParent != null && targetParent instanceof ViewGroup) {
             mTargetView = targetView;
-            if (targetParent instanceof FrameLayout) {
-                ((FrameLayout) targetParent).addView(this, new FrameLayout.LayoutParams(((FrameLayout) targetParent).getWidth(),
-                        ((FrameLayout) targetParent).getHeight()));
+            if (targetParent instanceof BadgeContainer) {
+                ((BadgeContainer) targetParent).addView(this);
             } else {
                 ViewGroup targetContainer = (ViewGroup) targetParent;
                 int index = targetContainer.indexOfChild(targetView);
                 ViewGroup.LayoutParams targetParams = targetView.getLayoutParams();
                 targetContainer.removeView(targetView);
-                final FrameLayout badgeContainer = new FrameLayout(getContext());
+                final BadgeContainer badgeContainer = new BadgeContainer(getContext());
                 targetContainer.addView(badgeContainer, index, targetParams);
-                badgeContainer.addView(targetView, new FrameLayout.LayoutParams(
-                        FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
-                badgeContainer.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        badgeContainer.addView(QBadgeView.this, new FrameLayout.LayoutParams(badgeContainer.getWidth(),
-                                badgeContainer.getHeight()));
-                    }
-                });
+                badgeContainer.addView(targetView);
+                badgeContainer.addView(this);
             }
         } else {
             throw new IllegalStateException("targetView must have a parent");
@@ -370,13 +365,13 @@ public class QBadgeView extends View implements Badge {
                 mBadgeCenter.x = mGravityOffset + mBadgePadding + rectWidth / 2f;
                 mBadgeCenter.y = mGravityOffset + mBadgePadding + mBadgeNumberRect.height() / 2f;
                 break;
-            case Gravity.END | Gravity.TOP:
-                mBadgeCenter.x = mWidth - (mGravityOffset + mBadgePadding + rectWidth / 2f);
-                mBadgeCenter.y = mGravityOffset + mBadgePadding + mBadgeNumberRect.height() / 2f;
-                break;
             case Gravity.START | Gravity.BOTTOM:
                 mBadgeCenter.x = mGravityOffset + mBadgePadding + rectWidth / 2f;
                 mBadgeCenter.y = mHeight - (mGravityOffset + mBadgePadding + mBadgeNumberRect.height() / 2f);
+                break;
+            case Gravity.END | Gravity.TOP:
+                mBadgeCenter.x = mWidth - (mGravityOffset + mBadgePadding + rectWidth / 2f);
+                mBadgeCenter.y = mGravityOffset + mBadgePadding + mBadgeNumberRect.height() / 2f;
                 break;
             case Gravity.END | Gravity.BOTTOM:
                 mBadgeCenter.x = mWidth - (mGravityOffset + mBadgePadding + rectWidth / 2f);
@@ -384,6 +379,22 @@ public class QBadgeView extends View implements Badge {
                 break;
             case Gravity.CENTER:
                 mBadgeCenter.x = mWidth / 2f;
+                mBadgeCenter.y = mHeight / 2f;
+                break;
+            case Gravity.CENTER | Gravity.TOP:
+                mBadgeCenter.x = mWidth / 2f;
+                mBadgeCenter.y = mGravityOffset + mBadgePadding + mBadgeNumberRect.height() / 2f;
+                break;
+            case Gravity.CENTER | Gravity.BOTTOM:
+                mBadgeCenter.x = mWidth / 2f;
+                mBadgeCenter.y = mHeight - (mGravityOffset + mBadgePadding + mBadgeNumberRect.height() / 2f);
+                break;
+            case Gravity.CENTER | Gravity.START:
+                mBadgeCenter.x = mGravityOffset + mBadgePadding + rectWidth / 2f;
+                mBadgeCenter.y = mHeight / 2f;
+                break;
+            case Gravity.CENTER | Gravity.END:
+                mBadgeCenter.x = mWidth - (mGravityOffset + mBadgePadding + rectWidth / 2f);
                 mBadgeCenter.y = mHeight / 2f;
                 break;
         }
@@ -403,7 +414,8 @@ public class QBadgeView extends View implements Badge {
         }
         if (mAnimator == null || !mAnimator.isRunning()) {
             screenFromWindow(true);
-            mAnimator = BadgeAnimator.start(createBadgeBitmap(), center, this);
+            mAnimator = new BadgeAnimator(createBadgeBitmap(), center, this);
+            mAnimator.start();
             setBadgeNumber(0);
         }
     }
@@ -419,7 +431,7 @@ public class QBadgeView extends View implements Badge {
 
     @Override
     public void hide(boolean animate) {
-        if (animate) {
+        if (animate && mActivityRoot != null) {
             animateHide(mRowBadgeCenter);
         } else {
             setBadgeNumber(0);
@@ -527,7 +539,9 @@ public class QBadgeView extends View implements Badge {
 
     /**
      * @param gravity only support Gravity.START | Gravity.TOP , Gravity.END | Gravity.TOP ,
-     *                Gravity.START | Gravity.BOTTOM , Gravity.END | Gravity.BOTTOM , Gravity.CENTER
+     *                Gravity.START | Gravity.BOTTOM , Gravity.END | Gravity.BOTTOM ,
+     *                Gravity.CENTER , Gravity.CENTER | Gravity.TOP , Gravity.CENTER | Gravity.BOTTOM ,
+     *                Gravity.CENTER | Gravity.START , Gravity.CENTER | Gravity.END
      */
     @Override
     public Badge setBadgeGravity(int gravity) {
@@ -535,12 +549,18 @@ public class QBadgeView extends View implements Badge {
                 gravity == (Gravity.END | Gravity.TOP) ||
                 gravity == (Gravity.START | Gravity.BOTTOM) ||
                 gravity == (Gravity.END | Gravity.BOTTOM) ||
-                gravity == (Gravity.CENTER)) {
+                gravity == (Gravity.CENTER) ||
+                gravity == (Gravity.CENTER | Gravity.TOP) ||
+                gravity == (Gravity.CENTER | Gravity.BOTTOM) ||
+                gravity == (Gravity.CENTER | Gravity.START) ||
+                gravity == (Gravity.CENTER | Gravity.END)) {
             mBadgeGravity = gravity;
             invalidate();
         } else {
             throw new IllegalStateException("only support Gravity.START | Gravity.TOP , Gravity.END | Gravity.TOP , " +
-                    "Gravity.START | Gravity.BOTTOM , Gravity.END | Gravity.BOTTOM , Gravity.CENTER");
+                    "Gravity.START | Gravity.BOTTOM , Gravity.END | Gravity.BOTTOM , Gravity.CENTER" +
+                    " , Gravity.CENTER | Gravity.TOP , Gravity.CENTER | Gravity.BOTTOM ," +
+                    "Gravity.CENTER | Gravity.START , Gravity.CENTER | Gravity.END");
         }
         return this;
     }
@@ -621,5 +641,43 @@ public class QBadgeView extends View implements Badge {
     public PointF getDragCenter() {
         if (mDraggable && mDragging) return mDragCenter;
         return null;
+    }
+
+    private class BadgeContainer extends ViewGroup {
+
+        public BadgeContainer(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected void onLayout(boolean changed, int l, int t, int r, int b) {
+            for (int i = 0; i < getChildCount(); i++) {
+                View child = getChildAt(i);
+                child.layout(0, 0, child.getMeasuredWidth(), child.getMeasuredHeight());
+            }
+        }
+
+        @Override
+        protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+            View targetView = null, badgeView = null;
+            for (int i = 0; i < getChildCount(); i++) {
+                View child = getChildAt(i);
+                if (!(child instanceof QBadgeView)) {
+                    targetView = child;
+                } else {
+                    badgeView = child;
+                }
+            }
+            if (targetView == null) {
+                super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+            } else {
+                targetView.measure(widthMeasureSpec, heightMeasureSpec);
+                if (badgeView != null) {
+                    badgeView.measure(MeasureSpec.makeMeasureSpec(targetView.getMeasuredWidth(), MeasureSpec.EXACTLY),
+                            MeasureSpec.makeMeasureSpec(targetView.getMeasuredHeight(), MeasureSpec.EXACTLY));
+                }
+                setMeasuredDimension(targetView.getMeasuredWidth(), targetView.getMeasuredHeight());
+            }
+        }
     }
 }

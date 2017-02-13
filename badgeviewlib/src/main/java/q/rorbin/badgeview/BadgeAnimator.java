@@ -7,9 +7,12 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.util.Log;
 
 import java.lang.ref.WeakReference;
 import java.util.Random;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * @author chqiu
@@ -20,37 +23,31 @@ public class BadgeAnimator extends ValueAnimator {
     private BitmapFragment[][] mFragments;
     private WeakReference<QBadgeView> mWeakBadge;
 
-    private BadgeAnimator(QBadgeView badge) {
+    public BadgeAnimator(Bitmap badgeBitmap, PointF center, QBadgeView badge) {
         mWeakBadge = new WeakReference<>(badge);
-    }
-
-    public static BadgeAnimator start(Bitmap badgeBitmap, PointF center, QBadgeView badge) {
-        final BadgeAnimator anime = new BadgeAnimator(badge);
-        anime.setFloatValues(0f, 1f);
-        anime.setDuration(500);
-        anime.mFragments = anime.getFragments(badgeBitmap, center);
-        anime.addUpdateListener(new AnimatorUpdateListener() {
+        setFloatValues(0f, 1f);
+        setDuration(500);
+        mFragments = getFragments(badgeBitmap, center);
+        addUpdateListener(new AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                QBadgeView badgeView = anime.mWeakBadge.get();
+                QBadgeView badgeView = mWeakBadge.get();
                 if (badgeView == null || !badgeView.isShown()) {
-                    anime.end();
+                    cancel();
                 } else {
                     badgeView.invalidate();
                 }
             }
         });
-        anime.addListener(new AnimatorListenerAdapter() {
+        addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                QBadgeView badgeView = anime.mWeakBadge.get();
+                QBadgeView badgeView = mWeakBadge.get();
                 if (badgeView != null) {
                     badgeView.reset();
                 }
             }
         });
-        anime.start();
-        return anime;
     }
 
     public void draw(Canvas canvas) {

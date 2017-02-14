@@ -49,9 +49,10 @@ hide | 隐藏Badge
 
 ###4.在ListView或者RecyclerView中使用
 可参考demo中[ListViewActivity](https://github.com/qstumn/BadgeView/blob/master/app/src/main/java/q/rorbin/badgeviewdemo/ListViewActivity.java)、[RecyclerViewActivity](https://github.com/qstumn/BadgeView/blob/master/app/src/main/java/q/rorbin/badgeviewdemo/RecyclerViewActivity.java)
-###5.注意事项
-* 请不要在xml中创建QBadgeView
-* QBadgeView和TargetView绑定是采用的替换TargetView的Parent实现的，同时将Parent的Id和TargetView的Id设置成一样来保证不会在RelativeLayout中出现位置错乱问题，所以在bindTarget后再次使用findViewById(TargetViewId)得到的会是Parent而不是TargetView，此时建议使用Badge.getTargetView方法来获取TargetView
+
+###5.一些注意事项
+* 请不要在xml中创建Badge
+* Badge和TargetView绑定是采用的替换TargetView的Parent实现的，同时将Parent的Id和TargetView的Id设置成一样来保证不会在RelativeLayout中出现位置错乱问题，所以在bindTarget后再次使用findViewById(TargetViewId)得到的会是Parent而不是TargetView，此时建议使用Badge.getTargetView方法来获取TargetView，如果您有更好的解决方式并愿意和我分享，请在Issues中提交给我或者给我发邮件，谢谢。
 
 ###6.更新计划
 

@@ -148,6 +148,11 @@ public class QBadgeView extends View implements Badge {
     }
 
     @Override
+    public View getTargetView() {
+        return mTargetView;
+    }
+
+    @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         if (mActivityRoot == null) findActivityRoot(mTargetView);

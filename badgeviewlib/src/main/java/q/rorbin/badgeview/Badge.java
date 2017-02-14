@@ -54,6 +54,8 @@ public interface Badge {
 
     Badge bindTarget(View view);
 
+    View getTargetView();
+
     void hide(boolean animate);
 
     interface OnDragStateChangedListener {

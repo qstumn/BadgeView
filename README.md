@@ -8,10 +8,8 @@
 ##Change Log
 
 ```
-v1.0.4
-1. 修复在hide、bindTarget在某些情况下会出现异常崩溃的BUG
-2. BadgeGravity新增CENTER | TOP、CENTER | BOTTOM、CENTER | START、CENTER | END
-3. demo中添加了在ListView、RecyclerView中使用的例子
+v1.0.5
+添加了getTargetView方法
 ``` 
 
 ###一些特性
@@ -26,7 +24,7 @@ v1.0.4
 ## how to use:
 ###1. gradle
 ```
-    compile 'q.rorbin:badgeview:1.0.4'
+    compile 'q.rorbin:badgeview:1.0.5'
 ```
 
 ###2. code
@@ -61,6 +59,11 @@ hide | 隐藏Badge
 
 ####Change Log History
 ```
+v1.0.4
+1. 修复在hide、bindTarget在某些情况下会出现异常崩溃的BUG
+2. BadgeGravity新增CENTER | TOP、CENTER | BOTTOM、CENTER | START、CENTER | END
+3. demo中添加了在ListView、RecyclerView中使用的例子
+
 v1.0.2
 1. 修复了在ScrollView中bindTarget会导致拖拽消除时起始拖拽位置不正确的BUG
 2. 减少了隐藏动画的碎片数量,降低内存占用

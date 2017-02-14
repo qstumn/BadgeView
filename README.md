@@ -11,7 +11,7 @@
 v1.0.4
 1. 修复在hide、bindTarget在某些情况下会出现异常崩溃的BUG
 2. BadgeGravity新增CENTER | TOP、CENTER | BOTTOM、CENTER | START、CENTER | END
-3. demo中添加了在ListView或RecyclerView中使用的例子
+3. demo中添加了在ListView、RecyclerView中使用的例子
 ``` 
 
 ###一些特性

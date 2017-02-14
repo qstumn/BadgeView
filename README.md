@@ -31,7 +31,6 @@ v1.0.5
 ```
 new QBadgeView(context).bindTarget(textview).setBadgeNumber(5);
 ```    
-注：请不要在xml中创建QBadgeView
 
 ###3. 方法说明
   code | 说明
@@ -50,8 +49,11 @@ hide | 隐藏Badge
 
 ###4.在ListView或者RecyclerView中使用
 可参考demo中[ListViewActivity](https://github.com/qstumn/BadgeView/blob/master/app/src/main/java/q/rorbin/badgeviewdemo/ListViewActivity.java)、[RecyclerViewActivity](https://github.com/qstumn/BadgeView/blob/master/app/src/main/java/q/rorbin/badgeviewdemo/RecyclerViewActivity.java)
+###5.注意事项
+* 请不要在xml中创建QBadgeView
+* QBadgeView和TargetView绑定是采用的替换TargetView的Parent实现的，同时将Parent的Id和TargetView的Id设置成一样来保证不会在RelativeLayout中出现位置错乱问题，所以在bindTarget后再次使用findViewById(TargetViewId)得到的会是Parent而不是TargetView，此时建议使用Badge.getTargetView方法来获取TargetView
 
-###5.更新计划
+###6.更新计划
 
 1 . 显示文字
 2 . 自定义复杂的背景

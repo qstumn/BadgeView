@@ -60,7 +60,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
                 textView = (TextView) itemView.findViewById(R.id.tv_content);
                 badge = new QBadgeView(RecyclerViewActivity.this).bindTarget(itemView.findViewById(R.id.root));
                 badge.setBadgeGravity(Gravity.CENTER | Gravity.END);
-                badge.setBadgeNumberSize(14, true);
+                badge.setBadgeTextSize(14, true);
                 badge.setBadgePadding(6, true);
                 badge.setOnDragStateChangedListener(new Badge.OnDragStateChangedListener() {
                     @Override

@@ -56,7 +56,7 @@ public class ListViewActivity extends AppCompatActivity {
                 convertView = LayoutInflater.from(ListViewActivity.this).inflate(R.layout.item_view, parent, false);
                 holder.textView = (TextView) convertView.findViewById(R.id.tv_content);
                 holder.badge = new QBadgeView(ListViewActivity.this).bindTarget(convertView.findViewById(R.id.imageview));
-                holder.badge.setBadgeNumberSize(12, true);
+                holder.badge.setBadgeTextSize(12, true);
                 convertView.setTag(holder);
             } else {
                 holder = (Holder) convertView.getTag();

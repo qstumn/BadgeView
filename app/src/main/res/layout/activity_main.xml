@@ -16,7 +16,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
-        android:layout_marginTop="15dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -61,78 +60,125 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:layout_marginBottom="10dp">
 
                 <TextView
+                    android:id="@+id/tv_gravity_tips"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Gravity : "
                     android:textColor="#FFFFFF" />
 
-                <RadioGroup
-                    android:id="@+id/rg_gravity"
+                <RadioButton
+                    android:id="@+id/rb_st"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_below="@+id/tv_gravity_tips"
+                    android:text="Start | Top"
+                    android:textColor="#FFFFFF" />
 
-                    <RadioButton
-                        android:id="@+id/rb_st"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Start | Top"
-                        android:textColor="#FFFFFF" />
+                <RadioButton
+                    android:id="@+id/rb_sb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_gravity_tips"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/rb_st"
+                    android:text="Start | Bottom"
+                    android:textColor="#FFFFFF" />
 
-                    <RadioButton
-                        android:id="@+id/rb_sb"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Start | Bottom"
-                        android:textColor="#FFFFFF" />
+                <RadioButton
+                    android:id="@+id/rb_et"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_gravity_tips"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/rb_sb"
+                    android:checked="true"
+                    android:text="End | Top"
+                    android:textColor="#FFFFFF" />
 
-                    <RadioButton
-                        android:id="@+id/rb_et"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="End | Top"
-                        android:textColor="#FFFFFF" />
+                <RadioButton
+                    android:id="@+id/rb_eb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rb_st"
+                    android:text="End | Bottom"
+                    android:textColor="#FFFFFF" />
 
-                    <RadioButton
-                        android:id="@+id/rb_eb"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="End | Bottom"
-                        android:textColor="#FFFFFF" />
+                <RadioButton
+                    android:id="@+id/rb_ct"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rb_st"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/rb_eb"
+                    android:text="Center | Top"
+                    android:textColor="#FFFFFF" />
 
-                    <RadioButton
-                        android:id="@+id/rb_c"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Center"
-                        android:textColor="#FFFFFF" />
-                </RadioGroup>
+                <RadioButton
+                    android:id="@+id/rb_ce"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rb_st"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/rb_ct"
+                    android:text="Center | End"
+                    android:textColor="#FFFFFF" />
+
+                <RadioButton
+                    android:id="@+id/rb_cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rb_eb"
+                    android:text="Center | Bottom"
+                    android:textColor="#FFFFFF" />
+
+                <RadioButton
+                    android:id="@+id/rb_cs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rb_eb"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/rb_cb"
+                    android:text="Center | Start"
+                    android:textColor="#FFFFFF" />
+
+                <RadioButton
+                    android:id="@+id/rb_c"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rb_eb"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/rb_cs"
+                    android:text="Center"
+                    android:textColor="#FFFFFF" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
 
                     <TextView
-                        android:id="@+id/tv_offset"
+                        android:id="@+id/tv_offsetx"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="GravityOffset : 5"
+                        android:text="GravityOffsetX : 5"
                         android:textColor="#FFFFFF" />
 
                     <SeekBar
-                        android:id="@+id/seekBar_offset"
+                        android:id="@+id/seekBar_offsetx"
                         style="@style/Widget.AppCompat.SeekBar.Discrete"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -141,15 +187,23 @@
                         android:max="20"
                         android:progress="5" />
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
                     <TextView
-                        android:id="@+id/tv_padding"
+                        android:id="@+id/tv_offsety"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="BadgePadding : 5"
+                        android:text="GravityOffsetY : 5"
                         android:textColor="#FFFFFF" />
-
                     <SeekBar
-                        android:id="@+id/seekBar_padding"
+                        android:id="@+id/seekBar_offsety"
                         style="@style/Widget.AppCompat.SeekBar.Discrete"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -158,28 +212,31 @@
                         android:max="20"
                         android:progress="5" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="ShowShadow : "
-                            android:textColor="#FFFFFF" />
-
-                        <Switch
-                            android:id="@+id/swicth_shadow"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:checked="false" />
-                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_padding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BadgePadding : 5"
+                android:textColor="#FFFFFF" />
+
+            <SeekBar
+                android:id="@+id/seekBar_padding"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:max="20"
+                android:progress="5" />
+        </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -198,24 +255,66 @@
                     android:id="@+id/iv_badgecolor"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:background="#E84E40" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dp"
-                    android:text="NumberColor : "
+                    android:layout_marginLeft="30dp"
+                    android:text="ShowShadow : "
                     android:textColor="#FFFFFF" />
 
-                <ImageView
-                    android:id="@+id/iv_numbercolor"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="#FFFFFF" />
-            </LinearLayout>
+                <Switch
+                    android:id="@+id/swicth_shadow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true" />
 
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextColor : "
+                android:textColor="#FFFFFF" />
+
+            <ImageView
+                android:id="@+id/iv_numbercolor"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:background="#FFFFFF" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_numbersize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextSize : 11"
+                    android:textColor="#FFFFFF" />
+
+                <SeekBar
+                    android:id="@+id/seekBar_numbersize"
+                    style="@style/Widget.AppCompat.SeekBar.Discrete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="30"
+                    android:progress="11" />
+            </LinearLayout>
+        </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -233,7 +332,6 @@
                     android:id="@+id/et_badgenumber"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:inputType="numberSigned"
                     android:maxLength="7"
@@ -261,24 +359,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tv_numbersize"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="NumberSize : 10"
+                    android:text="Text : "
                     android:textColor="#FFFFFF" />
 
-                <SeekBar
-                    android:id="@+id/seekBar_numbersize"
-                    style="@style/Widget.AppCompat.SeekBar.Discrete"
-                    android:layout_width="match_parent"
+                <EditText
+                    android:id="@+id/et_badgetext"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:max="30"
-                    android:progress="10" />
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textColor="#FFFFFF" />
+
+
             </LinearLayout>
 
             <LinearLayout

@@ -14,6 +14,10 @@ public interface Badge {
 
     int getBadgeNumber();
 
+    Badge setBadgeText(String badgeText);
+
+    String getBadgeText();
+
     Badge setExactMode(boolean isExact);
 
     boolean isExactMode();
@@ -26,13 +30,13 @@ public interface Badge {
 
     int getBadgeBackgroundColor();
 
-    Badge setBadgeNumberColor(int color);
+    Badge setBadgeTextColor(int color);
 
-    int getBadgeNumberColor();
+    int getBadgeTextColor();
 
-    Badge setBadgeNumberSize(float size, boolean isSpValue);
+    Badge setBadgeTextSize(float size, boolean isSpValue);
 
-    float getBadgeNumberSize(boolean isSpValue);
+    float getBadgeTextSize(boolean isSpValue);
 
     Badge setBadgePadding(float padding, boolean isDpValue);
 
@@ -44,9 +48,13 @@ public interface Badge {
 
     int getBadgeGravity();
 
-    Badge setGravityOffset(int offset, boolean isDpValue);
+    Badge setGravityOffset(float offset, boolean isDpValue);
 
-    int getGravityOffset(boolean isDpValue);
+    Badge setGravityOffset(float offsetX, float offsetY, boolean isDpValue);
+
+    float getGravityOffsetX(boolean isDpValue);
+
+    float getGravityOffsetY(boolean isDpValue);
 
     Badge setOnDragStateChangedListener(OnDragStateChangedListener l);
 

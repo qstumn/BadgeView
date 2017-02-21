@@ -19,7 +19,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.RadioGroup;
+import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -32,12 +32,13 @@ import q.rorbin.badgeview.QBadgeView;
 
 
 public class MainActivity extends AppCompatActivity {
-    TextView textview, tv_offset, tv_padding, tv_numbersize, tv_dragstate;
-    EditText et_badgenumber;
+    TextView textview, tv_offsetx, tv_padding, tv_offsety, tv_numbersize, tv_dragstate;
+    EditText et_badgenumber, et_badgetext;
     ImageView imageview, iv_badgecolor, iv_numbercolor;
     Button button, btn_animation;
-    RadioGroup rg_gravity;
-    SeekBar seekBar_offset, seekBar_padding, seekBar_numbersize;
+    List<RadioButton> radioButtons = new ArrayList<>();
+    CompoundButton lastRadioButton;
+    SeekBar seekBar_offsetx, seekBar_padding, seekBar_offsety, seekBar_numbersize;
     Switch swicth_exact, swicth_draggable, swicth_shadow;
 
     List<Badge> badges;
@@ -50,37 +51,45 @@ public class MainActivity extends AppCompatActivity {
         initView();
         initListener();
         initBadge();
-        et_badgenumber.setText("5");
-        seekBar_offset.setProgress(5);
-        seekBar_padding.setProgress(5);
-        seekBar_numbersize.setProgress(11);
-        swicth_exact.setChecked(false);
         swicth_draggable.setChecked(true);
-        swicth_shadow.setChecked(true);
     }
 
     private void initBadge() {
         badges = new ArrayList<>();
-        badges.add(new QBadgeView(this).bindTarget(textview));
-        badges.add(new QBadgeView(this).bindTarget(imageview));
-        badges.add(new QBadgeView(this).bindTarget(button));
+        badges.add(new QBadgeView(this).bindTarget(textview).setBadgeNumber(5));
+        badges.add(new QBadgeView(this).bindTarget(imageview).setBadgeText("(`･ω･´)ฅ").setBadgeBackgroundColor(0xff5677fc));
+        badges.add(new QBadgeView(this).bindTarget(button).setBadgeText("新").setBadgeTextSize(15, true)
+                .setBadgeBackgroundColor(0xffffeb3b).setBadgeTextColor(0xff000000));
     }
 
     private void initView() {
         textview = (TextView) findViewById(R.id.textview);
-        tv_offset = (TextView) findViewById(R.id.tv_offset);
+        tv_offsetx = (TextView) findViewById(R.id.tv_offsetx);
+        tv_offsety = (TextView) findViewById(R.id.tv_offsety);
         tv_padding = (TextView) findViewById(R.id.tv_padding);
         tv_numbersize = (TextView) findViewById(R.id.tv_numbersize);
         tv_dragstate = (TextView) findViewById(R.id.tv_dragstate);
         et_badgenumber = (EditText) findViewById(R.id.et_badgenumber);
+        et_badgetext = (EditText) findViewById(R.id.et_badgetext);
         imageview = (ImageView) findViewById(R.id.imageview);
         iv_badgecolor = (ImageView) findViewById(R.id.iv_badgecolor);
         iv_numbercolor = (ImageView) findViewById(R.id.iv_numbercolor);
         iv_numbercolor = (ImageView) findViewById(R.id.iv_numbercolor);
         button = (Button) findViewById(R.id.button);
         btn_animation = (Button) findViewById(R.id.btn_animation);
-        rg_gravity = (RadioGroup) findViewById(R.id.rg_gravity);
-        seekBar_offset = (SeekBar) findViewById(R.id.seekBar_offset);
+        radioButtons.add((RadioButton) findViewById(R.id.rb_st));
+        radioButtons.add((RadioButton) findViewById(R.id.rb_sb));
+        RadioButton rb_et = (RadioButton) findViewById(R.id.rb_et);
+        lastRadioButton = rb_et;
+        radioButtons.add(rb_et);
+        radioButtons.add((RadioButton) findViewById(R.id.rb_eb));
+        radioButtons.add((RadioButton) findViewById(R.id.rb_ct));
+        radioButtons.add((RadioButton) findViewById(R.id.rb_ce));
+        radioButtons.add((RadioButton) findViewById(R.id.rb_cb));
+        radioButtons.add((RadioButton) findViewById(R.id.rb_cs));
+        radioButtons.add((RadioButton) findViewById(R.id.rb_c));
+        seekBar_offsetx = (SeekBar) findViewById(R.id.seekBar_offsetx);
+        seekBar_offsety = (SeekBar) findViewById(R.id.seekBar_offsety);
         seekBar_padding = (SeekBar) findViewById(R.id.seekBar_padding);
         seekBar_numbersize = (SeekBar) findViewById(R.id.seekBar_numbersize);
         swicth_exact = (Switch) findViewById(R.id.swicth_exact);
@@ -89,11 +98,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initListener() {
-        rg_gravity.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        CompoundButton.OnCheckedChangeListener checkedChangeListener = new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (!isChecked) {
+                    return;
+                }
+                if (lastRadioButton != null) {
+                    lastRadioButton.setChecked(false);
+                }
+                lastRadioButton = buttonView;
                 for (Badge badge : badges) {
-                    switch (checkedId) {
+                    switch (buttonView.getId()) {
                         case R.id.rb_st:
                             badge.setBadgeGravity(Gravity.START | Gravity.TOP);
                             break;
@@ -106,26 +122,44 @@ public class MainActivity extends AppCompatActivity {
                         case R.id.rb_eb:
                             badge.setBadgeGravity(Gravity.END | Gravity.BOTTOM);
                             break;
+                        case R.id.rb_ct:
+                            badge.setBadgeGravity(Gravity.CENTER | Gravity.TOP);
+                            break;
+                        case R.id.rb_ce:
+                            badge.setBadgeGravity(Gravity.CENTER | Gravity.END);
+                            break;
+                        case R.id.rb_cb:
+                            badge.setBadgeGravity(Gravity.CENTER | Gravity.BOTTOM);
+                            break;
+                        case R.id.rb_cs:
+                            badge.setBadgeGravity(Gravity.CENTER | Gravity.START);
+                            break;
                         case R.id.rb_c:
                             badge.setBadgeGravity(Gravity.CENTER);
                             break;
                     }
                 }
             }
-        });
+        };
+        for (RadioButton rb : radioButtons) {
+            rb.setOnCheckedChangeListener(checkedChangeListener);
+        }
         SeekBar.OnSeekBarChangeListener onSeekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 for (Badge badge : badges) {
-                    if (seekBar == seekBar_offset) {
-                        tv_offset.setText("GravityOffset : " + progress);
-                        badge.setGravityOffset(progress, true);
+                    if (seekBar == seekBar_offsetx || seekBar == seekBar_offsety) {
+                        int x = seekBar_offsetx.getProgress();
+                        int y = seekBar_offsety.getProgress();
+                        tv_offsetx.setText("GravityOffsetX : " + x);
+                        tv_offsety.setText("GravityOffsetY : " + y);
+                        badge.setGravityOffset(x, y, true);
                     } else if (seekBar == seekBar_padding) {
                         tv_padding.setText("BadgePadding : " + progress);
                         badge.setBadgePadding(progress, true);
                     } else if (seekBar == seekBar_numbersize) {
-                        tv_numbersize.setText("NumberSize : " + progress);
-                        badge.setBadgeNumberSize(progress, true);
+                        tv_numbersize.setText("TextSize : " + progress);
+                        badge.setBadgeTextSize(progress, true);
                     }
                 }
             }
@@ -140,7 +174,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         };
-        seekBar_offset.setOnSeekBarChangeListener(onSeekBarChangeListener);
+        seekBar_offsetx.setOnSeekBarChangeListener(onSeekBarChangeListener);
+        seekBar_offsety.setOnSeekBarChangeListener(onSeekBarChangeListener);
         seekBar_padding.setOnSeekBarChangeListener(onSeekBarChangeListener);
         seekBar_numbersize.setOnSeekBarChangeListener(onSeekBarChangeListener);
         View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -163,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onColorClick(int color) {
                             iv_numbercolor.setBackgroundColor(color);
                             for (Badge badge : badges) {
-                                badge.setBadgeNumberColor(color);
+                                badge.setBadgeTextColor(color);
                             }
                         }
                     });
@@ -177,7 +212,13 @@ public class MainActivity extends AppCompatActivity {
         iv_badgecolor.setOnClickListener(onClickListener);
         iv_numbercolor.setOnClickListener(onClickListener);
         btn_animation.setOnClickListener(onClickListener);
-        et_badgenumber.addTextChangedListener(new TextWatcher() {
+        class MyTextWatcher implements TextWatcher {
+            private EditText editText;
+
+            public MyTextWatcher(EditText editText) {
+                this.editText = editText;
+            }
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -186,9 +227,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 try {
-                    int num = TextUtils.isEmpty(s) ? 0 : Integer.parseInt(s.toString());
                     for (Badge badge : badges) {
-                        badge.setBadgeNumber(num);
+                        if (editText == et_badgenumber) {
+                            int num = TextUtils.isEmpty(s) ? 0 : Integer.parseInt(s.toString());
+                            badge.setBadgeNumber(num);
+                        } else if (editText == et_badgetext) {
+                            badge.setBadgeText(s.toString());
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -199,7 +244,10 @@ public class MainActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
 
             }
-        });
+        }
+
+        et_badgenumber.addTextChangedListener(new MyTextWatcher(et_badgenumber));
+        et_badgetext.addTextChangedListener(new MyTextWatcher(et_badgetext));
         CompoundButton.OnCheckedChangeListener onCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

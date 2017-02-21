@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.util.Log;
@@ -64,7 +65,7 @@ public class BadgeAnimator extends ValueAnimator {
     private BitmapFragment[][] getFragments(Bitmap badgeBitmap, PointF center) {
         int width = badgeBitmap.getWidth();
         int height = badgeBitmap.getHeight();
-        float fragmentSize = Math.max(width, height) / 6f;
+        float fragmentSize = Math.min(width, height) / 6f;
         float startX = center.x - badgeBitmap.getWidth() / 2f;
         float startY = center.y - badgeBitmap.getHeight() / 2f;
         BitmapFragment[][] fragments = new BitmapFragment[(int) (height / fragmentSize)][(int) (width / fragmentSize)];

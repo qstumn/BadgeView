@@ -18,6 +18,7 @@ import static android.content.ContentValues.TAG;
 /**
  * @author chqiu
  *         Email:qstumn@163.com
+ * 隐藏动画,动画参考自https://github.com/tyrantgit/ExplosionField
  */
 
 public class BadgeAnimator extends ValueAnimator {

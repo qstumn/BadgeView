@@ -34,7 +34,7 @@ v1.0.6
 ```
 
 ###2. code
-```
+```java
 new QBadgeView(context).bindTarget(textview).setBadgeNumber(5);
 ```    
 

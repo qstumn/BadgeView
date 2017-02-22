@@ -29,7 +29,7 @@ v1.0.6
 
 ## how to use:
 ###1. gradle
-```
+```groovy
     compile 'q.rorbin:badgeview:1.0.6'
 ```
 

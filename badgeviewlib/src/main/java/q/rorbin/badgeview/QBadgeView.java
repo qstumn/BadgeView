@@ -344,9 +344,8 @@ public class QBadgeView extends View implements Badge {
             mBadgeBackgroundRect.top = center.y - (mBadgeTextRect.height() / 2f + mBadgePadding * 0.5f);
             mBadgeBackgroundRect.right = center.x + (mBadgeTextRect.width() / 2f + mBadgePadding);
             mBadgeBackgroundRect.bottom = center.y + (mBadgeTextRect.height() / 2f + mBadgePadding * 0.5f);
-            canvas.drawRoundRect(mBadgeBackgroundRect,
-                    DisplayUtil.dp2px(getContext(), 100), DisplayUtil.dp2px(getContext(), 100),
-                    mBadgeBackgroundPaint);
+            radius = mBadgeBackgroundRect.height() / 2f;
+            canvas.drawRoundRect(mBadgeBackgroundRect, radius, radius, mBadgeBackgroundPaint);
         }
         if (!mBadgeText.isEmpty()) {
             canvas.drawText(mBadgeText, center.x,

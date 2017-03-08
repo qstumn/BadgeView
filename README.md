@@ -8,12 +8,8 @@
 ##Change Log
 
 ```
-v1.0.6
-1、添加了setBadgeText方法
-2、添加了setGravityOffset(float x , float y)方法，可以用来分别设置x和y方向的偏移量
-3、优化隐藏动画，现在严格按照Badge的的大小生成隐藏动画
-4、修复Badge宽度过宽时只有触摸中心才能触发拖拽的BUG
-5、修改setBadgeNumberSize为setBadgeTextSize，setBadgeNumberColor改为setBadgeTextColor
+v1.0.7
+修复矩形背景时矩形圆角显示不正确的问题
 ``` 
 
 ###一些特性
@@ -30,7 +26,7 @@ v1.0.6
 ## how to use:
 ###1. gradle
 ```groovy
-    compile 'q.rorbin:badgeview:1.0.6'
+    compile 'q.rorbin:badgeview:1.0.7'
 ```
 
 ###2. code
@@ -68,6 +64,13 @@ hide | 隐藏Badge
 
 ####Change Log History
 ```
+v1.0.6
+1、添加了setBadgeText方法
+2、添加了setGravityOffset(float x , float y)方法，可以用来分别设置x和y方向的偏移量
+3、优化隐藏动画，现在严格按照Badge的的大小生成隐藏动画
+4、修复Badge宽度过宽时只有触摸中心才能触发拖拽的BUG
+5、修改setBadgeNumberSize为setBadgeTextSize，setBadgeNumberColor改为setBadgeTextColor
+
 v1.0.5
 添加了getTargetView方法
 

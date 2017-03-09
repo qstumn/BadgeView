@@ -5,8 +5,6 @@
 
 ![](https://github.com/qstumn/BadgeView/blob/master/demo_gif.gif?raw=true)
 
-##[Change Log](https://github.com/qstumn/BadgeView/releases)
-
 ###一些特性
 * 随意定制外观，包括Badge位置、底色、阴影、文字颜色、大小、内外边距等
 
@@ -21,8 +19,9 @@
 ## how to use:
 ###1. gradle
 ```groovy
-    compile 'q.rorbin:badgeview:1.0.7'
+    compile 'q.rorbin:badgeview:VERSION_CODE'
 ```
+VERSION_CODE : [here](https://github.com/qstumn/BadgeView/releases)
 
 ###2. code
 ```java

@@ -5,12 +5,7 @@
 
 ![](https://github.com/qstumn/BadgeView/blob/master/demo_gif.gif?raw=true)
 
-##Change Log
-
-```
-v1.0.7
-修复矩形背景时矩形圆角显示不正确的问题(https://github.com/qstumn/BadgeView/pull/16)
-```
+##[Change Log](https://github.com/qstumn/BadgeView/releases)
 
 ###一些特性
 * 随意定制外观，包括Badge位置、底色、阴影、文字颜色、大小、内外边距等

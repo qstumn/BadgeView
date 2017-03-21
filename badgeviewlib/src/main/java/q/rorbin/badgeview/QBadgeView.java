@@ -666,7 +666,7 @@ public class QBadgeView extends View implements Badge {
     }
 
     @Override
-    public Badge setBorder(int color, float width, boolean isDpValue) {
+    public Badge stroke(int color, float width, boolean isDpValue) {
         mColorBackgroundBorder = color;
         mBackgroundBorderWidth = isDpValue ? DisplayUtil.dp2px(getContext(), width) : width;
         invalidate();

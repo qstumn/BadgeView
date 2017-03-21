@@ -29,7 +29,7 @@ public interface Badge {
 
     Badge setBadgeBackgroundColor(int color);
 
-    Badge setBorder(int color, float width, boolean isDpValue);
+    Badge stroke(int color, float width, boolean isDpValue);
 
     int getBadgeBackgroundColor();
 

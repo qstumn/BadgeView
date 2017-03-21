@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 .setBadgeBackground(getResources().getDrawable(R.drawable.shape_round_rect)));
         badges.add(new QBadgeView(this).bindTarget(button).setBadgeText("新").setBadgeTextSize(13, true)
                 .setBadgeBackgroundColor(0xffffeb3b).setBadgeTextColor(0xff000000)
-                .setBorder(0xff000000, 1, true));
+                .stroke(0xff000000, 1, true));
     }
 
     private void initView() {

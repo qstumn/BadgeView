@@ -35,8 +35,8 @@ new QBadgeView(context).bindTarget(textview).setBadgeNumber(5);
   --- | ---
 setBadgeNumber | 设置Badge数字
 setBadgeText | 设置Badge文本
-setBadgeTextSize | 设置数值大小
-setBadgeTextColor | 设置数值颜色
+setBadgeTextSize | 设置文本字体大小
+setBadgeTextColor | 设置文本颜色
 setExactMode | 设置是否显示精确模式数值
 setBadgeGravity | 设置Badge相对于TargetView的位置
 setGravityOffset | 设置外边距

@@ -3,8 +3,6 @@
 
 ![](https://github.com/qstumn/BadgeView/blob/master/demo.png?raw=true)
 
-![](https://github.com/qstumn/BadgeView/blob/master/demo_gif.gif?raw=true)
-
 ### 一些特性
 * 随意定制外观，包括Badge位置、底色、边框、阴影、文字颜色(支持透明色)、大小、内外边距等
 
@@ -17,6 +15,8 @@
 * 支持类似QQ的拖拽消除效果（默认关闭）
 
 * 支持以动画的方式隐藏Badge
+
+![](https://github.com/qstumn/BadgeView/blob/master/demo_gif.gif?raw=true)
 
 ## how to use:
 ### 1. gradle

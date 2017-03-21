@@ -1,6 +1,8 @@
 package q.rorbin.badgeviewdemo;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -57,9 +59,12 @@ public class MainActivity extends AppCompatActivity {
     private void initBadge() {
         badges = new ArrayList<>();
         badges.add(new QBadgeView(this).bindTarget(textview).setBadgeNumber(5));
-        badges.add(new QBadgeView(this).bindTarget(imageview).setBadgeText("(`･ω･´)ฅ").setBadgeBackgroundColor(0xff5677fc));
-        badges.add(new QBadgeView(this).bindTarget(button).setBadgeText("新").setBadgeTextSize(15, true)
-                .setBadgeBackgroundColor(0xffffeb3b).setBadgeTextColor(0xff000000));
+        badges.add(new QBadgeView(this).bindTarget(imageview).setBadgeText("PNG").setBadgeTextColor(0x00000000)
+                .setBadgeGravity(Gravity.BOTTOM | Gravity.END).setBadgeBackgroundColor(0xff03a9f4)
+                .setBadgeBackground(getResources().getDrawable(R.drawable.shape_round_rect)));
+        badges.add(new QBadgeView(this).bindTarget(button).setBadgeText("新").setBadgeTextSize(13, true)
+                .setBadgeBackgroundColor(0xffffeb3b).setBadgeTextColor(0xff000000)
+                .setBorder(0xff000000, 1, true));
     }
 
     private void initView() {
@@ -294,9 +299,9 @@ public class MainActivity extends AppCompatActivity {
         GridView gv = new GridView(this);
         gv.setNumColumns(4);
         gv.setAdapter(new BaseAdapter() {
-            int[] colors = new int[]{0xffffffff, 0xff000000, 0xffe51c23, 0xffE84E40, 0xff9c27b0, 0xff673ab7,
+            int[] colors = new int[]{Color.TRANSPARENT, 0xffffffff, 0xff000000, 0xffe51c23, 0xffE84E40, 0xff9c27b0, 0xff673ab7,
                     0xff3f51b5, 0xff5677fc, 0xff03a9f4, 0xff00bcd4, 0xff009688, 0xff259b24, 0xff8bc34a, 0xffcddc39,
-                    0xffffeb3b, 0xffffc107, 0xffff9800, 0xffff5722, 0xff795548, 0xff9e9e9e};
+                    0xffffeb3b, 0xffffc107, 0xffff9800, 0xffff5722, 0xff795548};
 
             @Override
             public int getCount() {
@@ -328,7 +333,7 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager wm = (WindowManager) MainActivity.this
                         .getSystemService(Context.WINDOW_SERVICE);
                 wm.getDefaultDisplay().getMetrics(dm);
-                GridView.LayoutParams lp = new AbsListView.LayoutParams(AbsListView.LayoutParams.WRAP_CONTENT,
+                GridView.LayoutParams lp = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT,
                         (int) (dm.widthPixels / 5f));
                 v.setLayoutParams(lp);
                 return v;
@@ -336,6 +341,7 @@ public class MainActivity extends AppCompatActivity {
         });
         dialog.setView(gv);
         dialog.show();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0x33FFFFFF));
     }
 
     interface OnColorClickListener {

@@ -1,6 +1,7 @@
 package q.rorbin.badgeview;
 
 import android.graphics.PointF;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 
 /**
@@ -28,7 +29,15 @@ public interface Badge {
 
     Badge setBadgeBackgroundColor(int color);
 
+    Badge setBorder(int color, float width, boolean isDpValue);
+
     int getBadgeBackgroundColor();
+
+    Badge setBadgeBackground(Drawable drawable);
+
+    Badge setBadgeBackground(Drawable drawable, boolean clip);
+
+    Drawable getBadgeBackground();
 
     Badge setBadgeTextColor(int color);
 

@@ -21,7 +21,7 @@
 ## how to use:
 ### 1. gradle
 ```groovy
-    compile 'q.rorbin:badgeview:VERSION_CODE'
+    compile 'q.rorbin:badgeview:1.1.0'
 ```
 VERSION_CODE : [here](https://github.com/qstumn/BadgeView/releases)
 

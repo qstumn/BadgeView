@@ -582,6 +582,7 @@ public class QBadgeView extends View implements Badge {
     @Override
     public void hide(boolean animate) {
         if (animate && mActivityRoot != null) {
+            initRowBadgeCenter();
             animateHide(mRowBadgeCenter);
         } else {
             setBadgeNumber(0);

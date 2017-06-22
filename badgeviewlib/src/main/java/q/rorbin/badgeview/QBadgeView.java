@@ -15,6 +15,7 @@ import android.os.Build;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -123,8 +124,8 @@ public class QBadgeView extends View implements Badge {
         mBadgePadding = DisplayUtil.dp2px(getContext(), 5);
         mBadgeNumber = 0;
         mBadgeGravity = Gravity.END | Gravity.TOP;
-        mGravityOffsetX = DisplayUtil.dp2px(getContext(), 5);
-        mGravityOffsetY = DisplayUtil.dp2px(getContext(), 5);
+        mGravityOffsetX = DisplayUtil.dp2px(getContext(), 1);
+        mGravityOffsetY = DisplayUtil.dp2px(getContext(), 1);
         mFinalDragDistance = DisplayUtil.dp2px(getContext(), 90);
         mShowShadow = true;
         mDrawableBackgroundClip = false;
@@ -153,6 +154,7 @@ public class QBadgeView extends View implements Badge {
                 targetContainer.removeView(targetView);
                 final BadgeContainer badgeContainer = new BadgeContainer(getContext());
                 badgeContainer.setId(targetView.getId());
+                targetView.setId(View.NO_ID);
                 targetContainer.addView(badgeContainer, index, targetParams);
                 badgeContainer.addView(targetView);
                 badgeContainer.addView(this);
@@ -171,7 +173,14 @@ public class QBadgeView extends View implements Badge {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        if (mActivityRoot == null) findActivityRoot(mTargetView);
+        if (mActivityRoot == null) findViewRoot(mTargetView);
+    }
+
+    private void findViewRoot(View view) {
+        mActivityRoot = (ViewGroup) view.getRootView();
+        if (mActivityRoot == null) {
+            findActivityRoot(view);
+        }
     }
 
     private void findActivityRoot(View view) {

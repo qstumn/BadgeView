@@ -23,7 +23,7 @@
 ## how to use:
 ### 1. gradle
 ```groovy
-    compile 'q.rorbin:badgeview:1.1.2'
+    compile 'q.rorbin:badgeview:1.1.3'
 ```
 VERSION_CODE : [here](https://github.com/qstumn/BadgeView/releases)
 
@@ -60,9 +60,6 @@ hide | 隐藏Badge
 ### 6.更新计划
 添加富文本内容
 
-### 5.Thanks For
-
-https://github.com/mabeijianxi/stickyDots
 
 # LICENSE
 ```

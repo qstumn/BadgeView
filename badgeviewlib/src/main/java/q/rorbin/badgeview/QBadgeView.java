@@ -12,16 +12,18 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Parcelable;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
+import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -153,8 +155,9 @@ public class QBadgeView extends View implements Badge {
                 ViewGroup.LayoutParams targetParams = targetView.getLayoutParams();
                 targetContainer.removeView(targetView);
                 final BadgeContainer badgeContainer = new BadgeContainer(getContext());
-                badgeContainer.setId(targetView.getId());
-                targetView.setId(View.NO_ID);
+                if(targetContainer instanceof RelativeLayout){
+                    badgeContainer.setId(targetView.getId());
+                }
                 targetContainer.addView(badgeContainer, index, targetParams);
                 badgeContainer.addView(targetView);
                 badgeContainer.addView(this);
@@ -826,6 +829,13 @@ public class QBadgeView extends View implements Badge {
     }
 
     private class BadgeContainer extends ViewGroup {
+
+        @Override
+        protected void dispatchRestoreInstanceState(SparseArray<Parcelable> container) {
+            if(!(getParent() instanceof RelativeLayout)){
+                super.dispatchRestoreInstanceState(container);
+            }
+        }
 
         public BadgeContainer(Context context) {
             super(context);

@@ -184,8 +184,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:layout_marginTop="10dp"
-                        android:max="20"
-                        android:progress="1" />
+                        android:max="40"
+                        android:progress="20" />
 
                 </LinearLayout>
 
@@ -209,8 +209,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:layout_marginTop="10dp"
-                        android:max="20"
-                        android:progress="1" />
+                        android:max="40"
+                        android:progress="20" />
 
                 </LinearLayout>
             </LinearLayout>

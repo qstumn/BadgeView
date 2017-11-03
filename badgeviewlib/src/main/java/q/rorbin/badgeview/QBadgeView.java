@@ -525,24 +525,24 @@ public class QBadgeView extends View implements Badge {
                 mBadgeCenter.y = mHeight - (mGravityOffsetY + mBadgePadding + mBadgeTextRect.height() / 2f);
                 break;
             case Gravity.CENTER:
-                mBadgeCenter.x = mWidth / 2f;
-                mBadgeCenter.y = mHeight / 2f;
+                mBadgeCenter.x = (mWidth / 2f) + mGravityOffsetX;
+                mBadgeCenter.y = (mHeight / 2f) + mGravityOffsetY;
                 break;
             case Gravity.CENTER | Gravity.TOP:
-                mBadgeCenter.x = mWidth / 2f;
+                mBadgeCenter.x = (mWidth / 2f) + mGravityOffsetX;
                 mBadgeCenter.y = mGravityOffsetY + mBadgePadding + mBadgeTextRect.height() / 2f;
                 break;
             case Gravity.CENTER | Gravity.BOTTOM:
-                mBadgeCenter.x = mWidth / 2f;
+                mBadgeCenter.x = (mWidth / 2f) + mGravityOffsetX;
                 mBadgeCenter.y = mHeight - (mGravityOffsetY + mBadgePadding + mBadgeTextRect.height() / 2f);
                 break;
             case Gravity.CENTER | Gravity.START:
                 mBadgeCenter.x = mGravityOffsetX + mBadgePadding + rectWidth / 2f;
-                mBadgeCenter.y = mHeight / 2f;
+                mBadgeCenter.y = (mHeight / 2f) + mGravityOffsetY;
                 break;
             case Gravity.CENTER | Gravity.END:
                 mBadgeCenter.x = mWidth - (mGravityOffsetX + mBadgePadding + rectWidth / 2f);
-                mBadgeCenter.y = mHeight / 2f;
+                mBadgeCenter.y = (mHeight / 2f) + mGravityOffsetY;
                 break;
         }
         initRowBadgeCenter();

@@ -156,7 +156,7 @@ public class QBadgeView extends View implements Badge {
                 ViewGroup.LayoutParams targetParams = targetView.getLayoutParams();
                 targetContainer.removeView(targetView);
                 final BadgeContainer badgeContainer = new BadgeContainer(getContext());
-                if(targetContainer instanceof RelativeLayout){
+                if (targetContainer instanceof RelativeLayout) {
                     badgeContainer.setId(targetView.getId());
                 }
                 targetContainer.addView(badgeContainer, index, targetParams);
@@ -614,14 +614,12 @@ public class QBadgeView extends View implements Badge {
     @Override
     public Badge setBadgeNumber(int badgeNumber) {
         mBadgeNumber = badgeNumber;
-        if (mBadgeNumber < 0) {
-            mBadgeText = "";
+        if (mBadgeNumber <= 0) {
+            mBadgeText = null;
         } else if (mBadgeNumber > 99) {
             mBadgeText = mExact ? String.valueOf(mBadgeNumber) : "99+";
         } else if (mBadgeNumber > 0 && mBadgeNumber <= 99) {
             mBadgeText = String.valueOf(mBadgeNumber);
-        } else if (mBadgeNumber == 0) {
-            mBadgeText = null;
         }
         measureText();
         invalidate();
@@ -852,7 +850,7 @@ public class QBadgeView extends View implements Badge {
 
         @Override
         protected void dispatchRestoreInstanceState(SparseArray<Parcelable> container) {
-            if(!(getParent() instanceof RelativeLayout)){
+            if (!(getParent() instanceof RelativeLayout)) {
                 super.dispatchRestoreInstanceState(container);
             }
         }

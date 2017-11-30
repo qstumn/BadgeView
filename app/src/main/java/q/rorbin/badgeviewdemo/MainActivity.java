@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     List<RadioButton> radioButtons = new ArrayList<>();
     CompoundButton lastRadioButton;
     SeekBar seekBar_offsetx, seekBar_padding, seekBar_offsety, seekBar_numbersize;
-    Switch swicth_exact, swicth_draggable, swicth_shadow;
+    Switch swicth_exact, swicth_draggable, swicth_shadow, swicth_highlight;
 
     List<Badge> badges;
     @Override
@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
         swicth_exact = (Switch) findViewById(R.id.swicth_exact);
         swicth_draggable = (Switch) findViewById(R.id.swicth_draggable);
         swicth_shadow = (Switch) findViewById(R.id.swicth_shadow);
+        swicth_highlight = (Switch) findViewById(R.id.swicth_highlight);
     }
 
     private void initListener() {
@@ -290,6 +291,8 @@ public class MainActivity extends AppCompatActivity {
                                 } : null);
                     } else if (buttonView == swicth_shadow) {
                         badge.setShowShadow(isChecked);
+                    } else if (buttonView == swicth_highlight) {
+                        badge.setHighlightMode(isChecked);
                     }
                 }
             }
@@ -297,6 +300,7 @@ public class MainActivity extends AppCompatActivity {
         swicth_exact.setOnCheckedChangeListener(onCheckedChangeListener);
         swicth_draggable.setOnCheckedChangeListener(onCheckedChangeListener);
         swicth_shadow.setOnCheckedChangeListener(onCheckedChangeListener);
+        swicth_highlight.setOnCheckedChangeListener(onCheckedChangeListener);
     }
 
     private void selectorColor(final OnColorClickListener l) {

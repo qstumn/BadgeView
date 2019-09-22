@@ -10,6 +10,10 @@ import android.view.View;
  */
 
 public interface Badge {
+    
+    Badge setMaxBadgeNumber(int mMaxbadgeNumber);
+    
+    int getMaxBadgeNumber();
 
     Badge setBadgeNumber(int badgeNum);
 

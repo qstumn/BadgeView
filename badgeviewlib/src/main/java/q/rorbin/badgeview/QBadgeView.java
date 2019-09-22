@@ -644,7 +644,7 @@ public class QBadgeView extends View implements Badge {
     @Override
     public Badge setExactMode(boolean isExact) {
         mExact = isExact;
-        if (mBadgeNumber > 99) {
+        if (mBadgeNumber > mMaxBadgeNumber) {
             setBadgeNumber(mBadgeNumber);
         }
         return this;

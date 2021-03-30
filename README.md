@@ -1,3 +1,6 @@
+# 该项目已废弃停止维护, 请不要再您的生产环境中使用
+
+
 # BadgeView
 [ ![Download](https://api.bintray.com/packages/qstumn/maven/badgeview/images/download.svg) ](https://bintray.com/qstumn/maven/badgeview/_latestVersion)
 

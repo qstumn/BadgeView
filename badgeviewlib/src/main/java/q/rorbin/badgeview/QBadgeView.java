@@ -52,6 +52,7 @@ public class QBadgeView extends View implements Badge {
     protected int mBadgeGravity;
     protected float mGravityOffsetX;
     protected float mGravityOffsetY;
+    protected int mMaxBadgeNumber = 99;
 
     protected float mDefalutRadius;
     protected float mFinalDragDistance;
@@ -609,11 +610,11 @@ public class QBadgeView extends View implements Badge {
         mBadgeNumber = badgeNumber;
         if (mBadgeNumber < 0) {
             mBadgeText = "";
-        } else if (mBadgeNumber > 99) {
-            mBadgeText = mExact ? String.valueOf(mBadgeNumber) : "99+";
-        } else if (mBadgeNumber > 0 && mBadgeNumber <= 99) {
+        } else if (mBadgeNumber > mMaxBadgeNumber) {
+            mBadgeText = mExact ? String.valueOf(mBadgeNumber) : mMaxBadgeNumber + "+";
+        } else if (mBadgeNumber > 0) {
             mBadgeText = String.valueOf(mBadgeNumber);
-        } else if (mBadgeNumber == 0) {
+        } else {
             mBadgeText = null;
         }
         measureText();
@@ -643,7 +644,7 @@ public class QBadgeView extends View implements Badge {
     @Override
     public Badge setExactMode(boolean isExact) {
         mExact = isExact;
-        if (mBadgeNumber > 99) {
+        if (mBadgeNumber > mMaxBadgeNumber) {
             setBadgeNumber(mBadgeNumber);
         }
         return this;

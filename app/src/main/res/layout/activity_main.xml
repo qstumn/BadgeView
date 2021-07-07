@@ -266,7 +266,7 @@
                     android:textColor="#FFFFFF" />
 
                 <Switch
-                    android:id="@+id/swicth_shadow"
+                    android:id="@+id/switch_shadow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true" />
@@ -348,7 +348,7 @@
                     android:textColor="#FFFFFF" />
 
                 <Switch
-                    android:id="@+id/swicth_exact"
+                    android:id="@+id/switch_exact"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -378,6 +378,18 @@
                     android:paddingRight="10dp"
                     android:textColor="#FFFFFF" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="HighlightMode : "
+                    android:textColor="#FFFFFF" />
+
+                <Switch
+                    android:id="@+id/switch_highlight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:checked="false" />
 
             </LinearLayout>
 
@@ -396,7 +408,7 @@
                     android:textColor="#FFFFFF" />
 
                 <Switch
-                    android:id="@+id/swicth_draggable"
+                    android:id="@+id/switch_draggable"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp" />

@@ -52,6 +52,7 @@ public class QBadgeView extends View implements Badge {
     protected int mBadgeGravity;
     protected float mGravityOffsetX;
     protected float mGravityOffsetY;
+    protected boolean mHighlightMode;
 
     protected float mDefalutRadius;
     protected float mFinalDragDistance;
@@ -155,7 +156,7 @@ public class QBadgeView extends View implements Badge {
                 ViewGroup.LayoutParams targetParams = targetView.getLayoutParams();
                 targetContainer.removeView(targetView);
                 final BadgeContainer badgeContainer = new BadgeContainer(getContext());
-                if(targetContainer instanceof RelativeLayout){
+                if (targetContainer instanceof RelativeLayout) {
                     badgeContainer.setId(targetView.getId());
                 }
                 targetContainer.addView(badgeContainer, index, targetParams);
@@ -394,7 +395,7 @@ public class QBadgeView extends View implements Badge {
         if (center.x == -1000 && center.y == -1000) {
             return;
         }
-        if (mBadgeText.isEmpty() || mBadgeText.length() == 1) {
+        if (mBadgeText.length() <= 1 || mHighlightMode) {
             mBadgeBackgroundRect.left = center.x - (int) radius;
             mBadgeBackgroundRect.top = center.y - (int) radius;
             mBadgeBackgroundRect.right = center.x + (int) radius;
@@ -422,7 +423,7 @@ public class QBadgeView extends View implements Badge {
                 }
             }
         }
-        if (!mBadgeText.isEmpty()) {
+        if (!mBadgeText.isEmpty() && !mHighlightMode) {
             canvas.drawText(mBadgeText, center.x,
                     (mBadgeBackgroundRect.bottom + mBadgeBackgroundRect.top
                             - mBadgeTextFontMetrics.bottom - mBadgeTextFontMetrics.top) / 2f,
@@ -448,7 +449,7 @@ public class QBadgeView extends View implements Badge {
             canvas.drawBitmap(mBitmapClip, left, top, mBadgeBackgroundPaint);
             canvas.restore();
             mBadgeBackgroundPaint.setXfermode(null);
-            if (mBadgeText.isEmpty() || mBadgeText.length() == 1) {
+            if (mBadgeText.length() <= 1 || mHighlightMode) {
                 canvas.drawCircle(mBadgeBackgroundRect.centerX(), mBadgeBackgroundRect.centerY(),
                         mBadgeBackgroundRect.width() / 2f, mBadgeBackgroundBorderPaint);
             } else {
@@ -472,7 +473,7 @@ public class QBadgeView extends View implements Badge {
             mBitmapClip.recycle();
         }
         float radius = getBadgeCircleRadius();
-        if (mBadgeText.isEmpty() || mBadgeText.length() == 1) {
+        if (mBadgeText.length() <= 1 || mHighlightMode) {
             mBitmapClip = Bitmap.createBitmap((int) radius * 2, (int) radius * 2,
                     Bitmap.Config.ARGB_4444);
             Canvas srcCanvas = new Canvas(mBitmapClip);
@@ -493,7 +494,7 @@ public class QBadgeView extends View implements Badge {
     }
 
     private float getBadgeCircleRadius() {
-        if (mBadgeText.isEmpty()) {
+        if (mBadgeText.isEmpty() || mHighlightMode) {
             return mBadgePadding;
         } else if (mBadgeText.length() == 1) {
             return mBadgeTextRect.height() > mBadgeTextRect.width() ?
@@ -551,12 +552,18 @@ public class QBadgeView extends View implements Badge {
     private void measureText() {
         mBadgeTextRect.left = 0;
         mBadgeTextRect.top = 0;
-        if (TextUtils.isEmpty(mBadgeText)) {
+
+        String text = mBadgeText;
+        if (mHighlightMode) {
+            text = "";
+        }
+
+        if (TextUtils.isEmpty(text) && !mHighlightMode) {
             mBadgeTextRect.right = 0;
             mBadgeTextRect.bottom = 0;
         } else {
             mBadgeTextPaint.setTextSize(mBadgeTextSize);
-            mBadgeTextRect.right = mBadgeTextPaint.measureText(mBadgeText);
+            mBadgeTextRect.right = mBadgeTextPaint.measureText(text);
             mBadgeTextFontMetrics = mBadgeTextPaint.getFontMetrics();
             mBadgeTextRect.bottom = mBadgeTextFontMetrics.descent - mBadgeTextFontMetrics.ascent;
         }
@@ -607,14 +614,12 @@ public class QBadgeView extends View implements Badge {
     @Override
     public Badge setBadgeNumber(int badgeNumber) {
         mBadgeNumber = badgeNumber;
-        if (mBadgeNumber < 0) {
-            mBadgeText = "";
+        if (mBadgeNumber <= 0) {
+            mBadgeText = null;
         } else if (mBadgeNumber > 99) {
             mBadgeText = mExact ? String.valueOf(mBadgeNumber) : "99+";
         } else if (mBadgeNumber > 0 && mBadgeNumber <= 99) {
             mBadgeText = String.valueOf(mBadgeNumber);
-        } else if (mBadgeNumber == 0) {
-            mBadgeText = null;
         }
         measureText();
         invalidate();
@@ -652,6 +657,19 @@ public class QBadgeView extends View implements Badge {
     @Override
     public boolean isExactMode() {
         return mExact;
+    }
+
+    @Override
+    public Badge setHighlightMode(boolean isHighlightMode) {
+        mHighlightMode = isHighlightMode;
+        measureText();
+        invalidate();
+        return this;
+    }
+
+    @Override
+    public boolean isHighlightMode() {
+        return mHighlightMode;
     }
 
     @Override
@@ -832,7 +850,7 @@ public class QBadgeView extends View implements Badge {
 
         @Override
         protected void dispatchRestoreInstanceState(SparseArray<Parcelable> container) {
-            if(!(getParent() instanceof RelativeLayout)){
+            if (!(getParent() instanceof RelativeLayout)) {
                 super.dispatchRestoreInstanceState(container);
             }
         }

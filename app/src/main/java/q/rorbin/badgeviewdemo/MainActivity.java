@@ -3,20 +3,13 @@ package q.rorbin.badgeviewdemo;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.PersistableBundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.text.style.ImageSpan;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,9 +41,10 @@ public class MainActivity extends AppCompatActivity {
     List<RadioButton> radioButtons = new ArrayList<>();
     CompoundButton lastRadioButton;
     SeekBar seekBar_offsetx, seekBar_padding, seekBar_offsety, seekBar_numbersize;
-    Switch swicth_exact, swicth_draggable, swicth_shadow;
+    Switch switch_exact, switch_draggable, switch_shadow, switch_highlight;
 
     List<Badge> badges;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         initView();
         initListener();
         initBadge();
-        swicth_draggable.setChecked(true);
+        switch_draggable.setChecked(true);
     }
 
     private void initBadge() {
@@ -102,9 +96,10 @@ public class MainActivity extends AppCompatActivity {
         seekBar_offsety = (SeekBar) findViewById(R.id.seekBar_offsety);
         seekBar_padding = (SeekBar) findViewById(R.id.seekBar_padding);
         seekBar_numbersize = (SeekBar) findViewById(R.id.seekBar_numbersize);
-        swicth_exact = (Switch) findViewById(R.id.swicth_exact);
-        swicth_draggable = (Switch) findViewById(R.id.swicth_draggable);
-        swicth_shadow = (Switch) findViewById(R.id.swicth_shadow);
+        switch_exact = (Switch) findViewById(R.id.switch_exact);
+        switch_draggable = (Switch) findViewById(R.id.switch_draggable);
+        switch_shadow = (Switch) findViewById(R.id.switch_shadow);
+        switch_highlight = (Switch) findViewById(R.id.switch_highlight);
     }
 
     private void initListener() {
@@ -262,9 +257,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 for (Badge badge : badges) {
-                    if (buttonView == swicth_exact) {
+                    if (buttonView == switch_exact) {
                         badge.setExactMode(isChecked);
-                    } else if (buttonView == swicth_draggable) {
+                    } else if (buttonView == switch_draggable) {
                         badge.setOnDragStateChangedListener(isChecked ?
                                 new Badge.OnDragStateChangedListener() {
                                     @Override
@@ -288,15 +283,18 @@ public class MainActivity extends AppCompatActivity {
                                         }
                                     }
                                 } : null);
-                    } else if (buttonView == swicth_shadow) {
+                    } else if (buttonView == switch_shadow) {
                         badge.setShowShadow(isChecked);
+                    } else if (buttonView == switch_highlight) {
+                        badge.setHighlightMode(isChecked);
                     }
                 }
             }
         };
-        swicth_exact.setOnCheckedChangeListener(onCheckedChangeListener);
-        swicth_draggable.setOnCheckedChangeListener(onCheckedChangeListener);
-        swicth_shadow.setOnCheckedChangeListener(onCheckedChangeListener);
+        switch_exact.setOnCheckedChangeListener(onCheckedChangeListener);
+        switch_draggable.setOnCheckedChangeListener(onCheckedChangeListener);
+        switch_shadow.setOnCheckedChangeListener(onCheckedChangeListener);
+        switch_highlight.setOnCheckedChangeListener(onCheckedChangeListener);
     }
 
     private void selectorColor(final OnColorClickListener l) {

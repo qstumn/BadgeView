@@ -23,6 +23,10 @@ public interface Badge {
 
     boolean isExactMode();
 
+    Badge setHighlightMode(boolean isHighlightMode);
+
+    boolean isHighlightMode();
+
     Badge setShowShadow(boolean showShadow);
 
     boolean isShowShadow();

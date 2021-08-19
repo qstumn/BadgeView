@@ -159,8 +159,8 @@ public class MainActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 for (Badge badge : badges) {
                     if (seekBar == seekBar_offsetx || seekBar == seekBar_offsety) {
-                        int x = seekBar_offsetx.getProgress();
-                        int y = seekBar_offsety.getProgress();
+                        int x = seekBar_offsetx.getProgress()-(seekBar_offsetx.getMax()/2);
+                        int y = seekBar_offsety.getProgress()-(seekBar_offsety.getMax()/2);
                         tv_offsetx.setText("GravityOffsetX : " + x);
                         tv_offsety.setText("GravityOffsetY : " + y);
                         badge.setGravityOffset(x, y, true);
